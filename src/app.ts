@@ -1,4 +1,7 @@
-const button = document.querySelector('button');
+let count = 0;
+const button = document.querySelector('.btn-plus1');
+console.log(button);
 button?.addEventListener('click', function () {
-  console.log('huhu');
+  count++;
+  console.log(count);
 });
