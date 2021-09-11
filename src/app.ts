@@ -12,16 +12,8 @@ window.addEventListener('load', function () {
    counter++;
             if(counterContainer){
                 counterContainer.insertAdjacentHTML("beforeend", `<p>${counter}</p>`)
-                
             }
-           
-
-  
-        
-
-
     })
-    
    
 })
 
