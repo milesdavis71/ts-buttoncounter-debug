@@ -6,9 +6,8 @@ import counterView from './view.js';
 
 // view.generateMarkup
 // }
-
+counterView.addHandlerUpdateCounter();
 const init = function () {
   counterView.render();
-  console.log('Betöltve');
 };
 init();

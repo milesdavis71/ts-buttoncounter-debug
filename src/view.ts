@@ -1,27 +1,25 @@
 class counterView {
-  parentElement = document.querySelector('.counter');
+  parentElement = document.querySelector('.render');
+
   data: number = 0;
 
-  // addHandlerUpdateCounter(handler) {
-
-  //     if(this.parentElement){
-  //         this.parentElement.addEventListener('click', function () {
-  //             const btn = document.querySelector('.btn--update-servings');
-  //             if (!btn) return;
-  //             if (btn instanceof HTMLElement)
-  //             {
-  //                 const { updateTo=0 } = btn.dataset;
-  //                 if (+updateTo > 0) handler(+updateTo);
-
-  //             }
-
-  //           });
-  //     }
-  //   }
+  addHandlerUpdateCounter() {
+    if (this.parentElement) {
+      this.parentElement.addEventListener('click', function () {
+        const btn = document.querySelector('.btn--update-counter');
+        if (!btn) return;
+        if (btn instanceof HTMLElement) {
+          console.log(btn.dataset);
+          // const { updateTo = 0 } = btn.dataset;
+          // if (+updateTo > 0) handler(+updateTo);
+        }
+      });
+    }
+  }
 
   generateMarkup() {
     return `
-        <<div class="counter">
+        <div class="counter">
         <button class="btn btn--update-counter" data-update-to="${
           this.data - 1
         }">–</button>
@@ -31,12 +29,10 @@ class counterView {
         </div>
     `;
   }
+  // kiir() {}
   render() {
     const markup = this.generateMarkup();
     this.parentElement?.insertAdjacentHTML('afterbegin', markup);
-  }
-  kiir() {
-    console.log('huhu');
   }
 }
 
