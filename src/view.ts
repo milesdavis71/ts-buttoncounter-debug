@@ -6,25 +6,18 @@ class counterView {
   update(data: number) {
     this.data = data;
     const newMarkup = this.generateMarkup();
-    console.log(`huhu ${data}`);
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    if (this.parentElement) {
+      const curElements = Array.from(this.parentElement.querySelectorAll('*'));
+      newElements.forEach((newEl, i) => {
+        const curEl = curElements[i];
+        console.log(newEl.isEqualNode(curEl));
 
-    // Updates the changed text
-    //   if (
-    //     !newEl.isEqualNode(curEl) &&
-    //     newEl.firstChild.nodeValue.trim() !== ''
-    //   ) {
-    //     curEl.textContent = newEl.textContent;
-    //   }
-
-    //   // Updates the changed attributes
-    //   if (!newEl.isEqualNode(curEl)) {
-    //     Array.from(newEl.attributes).forEach(attr => {
-    //       curEl.setAttribute(attr.name, attr.value);
-    //     });
-    //   }
-    // };
+        curEl.textContent = newEl.textContent;
+      });
+    }
   }
-
   addHandlerUpdateCounter(handler: Function) {
     if (this.parentElement) {
       this.parentElement.addEventListener('click', function () {

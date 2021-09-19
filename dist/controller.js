@@ -5,7 +5,7 @@ const controlCounter = function (newCounter) {
     console.log(newCounter);
 };
 const init = function () {
-    counterView.update();
+    // counterView.update();
     counterView.render();
     counterView.addHandlerUpdateCounter(controlCounter);
 };
