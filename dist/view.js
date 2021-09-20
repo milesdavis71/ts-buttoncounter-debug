@@ -5,17 +5,6 @@ class counterView {
     }
     update(data) {
         this.data = data;
-        const newMarkup = this.generateMarkup();
-        const newDOM = document.createRange().createContextualFragment(newMarkup);
-        const newElements = Array.from(newDOM.querySelectorAll('*'));
-        if (this.parentElement) {
-            const curElements = Array.from(this.parentElement.querySelectorAll('*'));
-            newElements.forEach((newEl, i) => {
-                const curEl = curElements[i];
-                console.log(newEl.isEqualNode(curEl));
-                curEl.textContent = newEl.textContent;
-            });
-        }
     }
     addHandlerUpdateCounter(handler) {
         if (this.parentElement) {
@@ -44,10 +33,17 @@ class counterView {
         </div>
     `;
     }
-    render() {
+    render(data) {
         var _a;
+        this.data = data;
         const markup = this.generateMarkup();
+        this.clear();
         (_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.insertAdjacentHTML('afterbegin', markup);
+    }
+    clear() {
+        if (this.parentElement) {
+            this.parentElement.innerHTML = '';
+        }
     }
 }
 export default new counterView();
