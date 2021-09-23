@@ -1,5 +1,5 @@
 export const state = {
-  counter: 10,
+  counter: 0,
 };
 
 export const updateCounter = function (newCounter: number) {

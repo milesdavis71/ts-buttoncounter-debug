@@ -8,34 +8,41 @@ class counterView {
   }
   addHandlerUpdateCounter(handler: Function) {
     if (this.parentElement) {
-      this.parentElement.addEventListener('click', function () {
-        const btn = document.querySelector('.btn--update-counter');
+      this.parentElement.addEventListener('click', function (e) {
+        // Itt lehet HTMLButtonElement és HTMLInputElement is.
+        // Az input a tágabb, mert input lehet type szerint button,
+        // de sokminden más is (text, submit, search, date, stb.)
+        const buttonTarget = e.target as HTMLButtonElement;
+        // A closest metódus mindkét buttont ki tudja jelölni, az azonos selector alapján.
+        // amelyik gomb klikkelve lesz, abbón jön be a data-update-to-ban lévő adat.
+        const btn = buttonTarget.closest('.btn--update-counter');
         if (!btn) return;
-        console.log(btn);
         if (btn instanceof HTMLElement) {
+          // A HTMLElement.dataset WEB API interfészen egyéni adat értékek olvashatók ki
+          // egy html elemből, jelen esetben a button input típusú elemből.
+          // a button input element objektum dataset tulajdonságából kiolvasható
+          // a data-update-to-ban lévő adat, amit így lehet meghívni:
+          // btn.dataset.UpdateTo  Az updateTo a data-update-to-ból képződik.
           const { updateTo } = btn.dataset;
-          console.log();
           if (updateTo) {
-            handler(+updateTo);
+            if (+updateTo >= 0) {
+              handler(+updateTo);
+            }
           }
-          // console.log(updateTo);
         }
       });
     }
   }
-
   generateMarkup() {
     return `
-    <span class="recipe__info-data recipe__info-data--people">${
-      this._data
-    }</span>
+    <span>${this._data}</span>
     <span class="recipe__info-text">servings</span>
     <button class="btn btn--update-counter" data-update-to="${
       this._data - 1
-    }">Mínusz</button>
+    }"><strong>–</strong></button>
     <button class="btn btn--update-counter" data-update-to="${
       this._data + 1
-    }">Plusz</button>
+    }"><strong>+</strong></button>
     `;
   }
   render(data: number) {

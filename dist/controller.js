@@ -1,11 +1,13 @@
 import counterView from './view.js';
 import * as model from './model.js';
+// Gombra klikkeléskor fut le.
 const controlCounter = function (newCounter) {
+    // A modelben átadja a state-ben lévő adatot
+    // felülíró függvénynek a view-ból érkező adatot.
     model.updateCounter(newCounter);
-    counterView.render(model.state.counter);
 };
 const init = function () {
-    // counterView.update();
+    // Betölti a html-t a View-n keresztül.
     counterView.render(model.state.counter);
     counterView.addHandlerUpdateCounter(controlCounter);
 };
