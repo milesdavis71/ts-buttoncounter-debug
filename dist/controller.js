@@ -1,4 +1,4 @@
-import counterView from './view.js';
+import * as counterView from './view.js';
 import * as model from './model.js';
 // publisher-subscriber pattern –> ez a Subscribe; ha megtörtént a kilkkelés,
 // akkor igénybe veszi azt, és lefut.
