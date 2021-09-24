@@ -6,6 +6,9 @@ class counterView {
     update(data) {
         this._data = data;
     }
+    // publisher-subscriber pattern –> ez a Publisher; azt nézi, hogy történik-e klikkelés,
+    // ha történik, akkor a paraméterként átadott handler függvénynek (controlCounter)
+    // átadja az updateTo értéket, ami ott newCounter neve fog felvenni.
     addHandlerUpdateCounter(handler) {
         if (this.parentElement) {
             this.parentElement.addEventListener('click', function (e) {
@@ -44,9 +47,10 @@ class counterView {
     }
     render(data) {
         var _a;
+        // Itt érkezik be a modellből a data a renderelésre.
         this._data = data;
         const markup = this.generateMarkup();
-        this.clear();
+        // this.clear();
         (_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.insertAdjacentHTML('afterbegin', markup);
     }
     clear() {

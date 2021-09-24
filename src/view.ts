@@ -6,13 +6,17 @@ class counterView {
   update(data: number) {
     this._data = data;
   }
+
+  // publisher-subscriber pattern –> ez a Publisher; azt nézi, hogy történik-e klikkelés,
+  // ha történik, akkor a paraméterként átadott handler függvénynek (controlCounter)
+  // átadja az updateTo értéket, ami ott newCounter neve fog felvenni.
   addHandlerUpdateCounter(handler: Function) {
     if (this.parentElement) {
       this.parentElement.addEventListener('click', function (e) {
         // Itt lehet HTMLButtonElement és HTMLInputElement is.
         // Az input a tágabb, mert input lehet type szerint button,
         // de sokminden más is (text, submit, search, date, stb.)
-        const buttonTarget = e.target as HTMLButtonElement;
+        const buttonTarget = e.target as HTMLInputElement;
         // A closest metódus mindkét buttont ki tudja jelölni, az azonos selector alapján.
         // amelyik gomb klikkelve lesz, abbón jön be a data-update-to-ban lévő adat.
         const btn = buttonTarget.closest('.btn--update-counter');
@@ -46,10 +50,11 @@ class counterView {
     `;
   }
   render(data: number) {
+    // Itt érkezik be a modellből a data a renderelésre.
     this._data = data;
 
     const markup = this.generateMarkup();
-    this.clear();
+    // this.clear();
     this.parentElement?.insertAdjacentHTML('afterbegin', markup);
   }
 
