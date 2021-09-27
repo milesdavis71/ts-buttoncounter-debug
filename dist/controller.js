@@ -1,3 +1,5 @@
-"use strict";
-console.log('huhu');
+import { updateCounter } from './model.js';
+const controlCounter = function (newCounter) {
+    updateCounter;
+};
 //# sourceMappingURL=controller.js.map
