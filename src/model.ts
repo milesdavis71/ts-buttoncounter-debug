@@ -1,7 +1,8 @@
-export const state = {
-  counter: 0,
-};
+class State {
+  counterActualValue = 0;
 
-export const updateCounter = function (newNumber: number) {
-  state.counter = newNumber;
-};
+  updateCounter = (counterNewValue: number) => {
+    this.counterActualValue = counterNewValue;
+  };
+}
+export default new State();

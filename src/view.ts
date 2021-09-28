@@ -1,43 +1,42 @@
-let parentElement = document.querySelector('.render');
-let datainView: number = 0;
+class Render {
+  private counterView: number = 0;
+  private parentElement = document.querySelector('.render');
 
-export const addHandlerUpdateCounter = (handler: Function) => {
-  if (parentElement) {
-    parentElement.addEventListener('click', e => {
-      const buttonCounter = e.target as HTMLInputElement;
-      const btn = buttonCounter.closest('.btn--update-counter');
+  addHandlerUpdateCounter(handler: Function) {
+    this.parentElement?.addEventListener('click', e => {
+      const buttonUpdate = e.target as HTMLInputElement;
+      const btn = buttonUpdate.closest('.btn--update-counter');
       if (!btn) return;
       if (btn instanceof HTMLElement) {
         const { updateTo } = btn.dataset;
-
-        if (updateTo && 0 <= +updateTo) {
+        if (updateTo && +updateTo >= 0) {
           handler(+updateTo);
         }
       }
     });
   }
-};
 
-const generateMarkup = () => {
-  return `
-    <button class="btn btn--update-counter" data-update-to=${
-      datainView - 1
-    }>-</button>
+  generateMarkup() {
+    return `
   <button class="btn btn--update-counter" data-update-to=${
-    datainView + 1
-  }>+</button>
-  <span>${datainView}</span>
-  `;
-};
-
-export const render = (dataFromModel: number) => {
-  datainView = dataFromModel;
-  const markup = generateMarkup();
-  parentElement?.insertAdjacentHTML('afterbegin', markup);
-};
-
-export const clear = () => {
-  if (parentElement) {
-    parentElement.innerHTML = '';
+    this.counterView - 1
+  }>–</button>
+        <span>${this.counterView}</span>
+        <button class="btn btn--update-counter" data-update-to=${
+          this.counterView + 1
+        }>+</button>
+        `;
   }
-};
+
+  render(counterModelValue: number) {
+    this.counterView = counterModelValue;
+    const markup = this.generateMarkup();
+    this.parentElement?.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  clear() {
+    if (this.parentElement) this.parentElement.innerHTML = '';
+  }
+}
+
+export default new Render();

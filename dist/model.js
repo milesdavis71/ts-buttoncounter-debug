@@ -1,7 +1,10 @@
-export const state = {
-    counter: 0,
-};
-export const updateCounter = function (newNumber) {
-    state.counter = newNumber;
-};
+class State {
+    constructor() {
+        this.counterActualValue = 0;
+        this.updateCounter = (counterNewValue) => {
+            this.counterActualValue = counterNewValue;
+        };
+    }
+}
+export default new State();
 //# sourceMappingURL=model.js.map

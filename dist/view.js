@@ -1,36 +1,40 @@
-let parentElement = document.querySelector('.render');
-let datainView = 0;
-export const addHandlerUpdateCounter = (handler) => {
-    if (parentElement) {
-        parentElement.addEventListener('click', e => {
-            const buttonCounter = e.target;
-            const btn = buttonCounter.closest('.btn--update-counter');
+class Render {
+    constructor() {
+        this.counterView = 0;
+        this.parentElement = document.querySelector('.render');
+    }
+    addHandlerUpdateCounter(handler) {
+        var _a;
+        (_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.addEventListener('click', e => {
+            const buttonUpdate = e.target;
+            const btn = buttonUpdate.closest('.btn--update-counter');
             if (!btn)
                 return;
             if (btn instanceof HTMLElement) {
                 const { updateTo } = btn.dataset;
-                if (updateTo && 0 <= +updateTo) {
+                if (updateTo && +updateTo >= 0) {
                     handler(+updateTo);
                 }
             }
         });
     }
-};
-const generateMarkup = () => {
-    return `
-    <button class="btn btn--update-counter" data-update-to=${datainView - 1}>-</button>
-  <button class="btn btn--update-counter" data-update-to=${datainView + 1}>+</button>
-  <span>${datainView}</span>
-  `;
-};
-export const render = (dataFromModel) => {
-    datainView = dataFromModel;
-    const markup = generateMarkup();
-    parentElement === null || parentElement === void 0 ? void 0 : parentElement.insertAdjacentHTML('afterbegin', markup);
-};
-export const clear = () => {
-    if (parentElement) {
-        parentElement.innerHTML = '';
+    generateMarkup() {
+        return `
+  <button class="btn btn--update-counter" data-update-to=${this.counterView - 1}>–</button>
+        <span>${this.counterView}</span>
+        <button class="btn btn--update-counter" data-update-to=${this.counterView + 1}>+</button>
+        `;
     }
-};
+    render(counterModelValue) {
+        var _a;
+        this.counterView = counterModelValue;
+        const markup = this.generateMarkup();
+        (_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.insertAdjacentHTML('afterbegin', markup);
+    }
+    clear() {
+        if (this.parentElement)
+            this.parentElement.innerHTML = '';
+    }
+}
+export default new Render();
 //# sourceMappingURL=view.js.map

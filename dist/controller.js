@@ -1,14 +1,13 @@
-import { updateCounter } from './model.js';
-import { clear, render, addHandlerUpdateCounter } from './view.js';
-import { state } from './model.js';
-const controlCounter = function (newCounter) {
-    updateCounter(newCounter);
-    clear();
-    render(state.counter);
+import model from './model.js';
+import view from './view.js';
+const handleUpdateCounter = (counterNewValue) => {
+    model.updateCounter(counterNewValue);
+    view.clear();
+    view.render(model.counterActualValue);
 };
 const init = () => {
-    render(state.counter);
-    addHandlerUpdateCounter(controlCounter);
+    view.render(model.counterActualValue);
+    view.addHandlerUpdateCounter(handleUpdateCounter);
 };
 init();
 //# sourceMappingURL=controller.js.map
