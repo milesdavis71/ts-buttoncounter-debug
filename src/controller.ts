@@ -1,14 +1,14 @@
 import model from './model.js';
 import view from './view.js';
 
-const handleUpdateCounter = (counterNewValue: number) => {
-  model.updateCounter(counterNewValue);
+const handlerUpdateState = (counterViewValue: number) => {
+  model.updateState(counterViewValue);
   view.clear();
-  view.render(model.counterActualValue);
+  view.render(model.counterStateValue);
 };
 
 const init = () => {
-  view.render(model.counterActualValue);
-  view.addHandlerUpdateCounter(handleUpdateCounter);
+  view.render(model.counterStateValue);
+  view.addHandlerUpdateCounter(handlerUpdateState);
 };
 init();
