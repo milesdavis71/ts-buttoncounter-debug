@@ -1,5 +1,5 @@
 class Render {
-  counterViewValue = 0;
+  dataInView = 0;
   parentElement = document.querySelector('.render');
 
   addHandlerUpdateCounter(handler: Function) {
@@ -18,13 +18,13 @@ class Render {
 
   generateMarkup() {
     return `
-    <span>${this.counterViewValue}</span>
+    <span>${this.dataInView}</span>
     <span class="recipe__info-text">servings</span>
     <button class="btn btn--update-counter" data-update-to="${
-      this.counterViewValue - 1
+      this.dataInView - 1
     }"><strong>–</strong></button>
     <button class="btn btn--update-counter" data-update-to="${
-      this.counterViewValue + 1
+      this.dataInView + 1
     }"><strong>+</strong></button>
     `;
   }
@@ -33,8 +33,8 @@ class Render {
       this.parentElement.innerHTML = '';
     }
   }
-  render(counterStateValue: number) {
-    this.counterViewValue = counterStateValue;
+  render(dataFromModel: number) {
+    this.dataInView = dataFromModel;
     const markup = this.generateMarkup();
     if (this.parentElement) {
       this.parentElement.insertAdjacentHTML('afterbegin', markup);
