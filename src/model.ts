@@ -1,8 +1,9 @@
 class State {
   counterStateValue = 0;
 
-  updateState = (CounterViewValue: number) => {
-    this.counterStateValue = CounterViewValue;
-  };
+  updateCounter(counterViewValue: number) {
+    this.counterStateValue = counterViewValue;
+  }
 }
+
 export default new State();

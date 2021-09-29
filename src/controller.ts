@@ -1,8 +1,7 @@
-import model from './model.js';
 import view from './view.js';
-
-const handlerUpdateState = (counterViewValue: number) => {
-  model.updateState(counterViewValue);
+import model from './model.js';
+const handlerUpdateState = (counterValueView: number) => {
+  model.updateCounter(counterValueView);
   view.clear();
   view.render(model.counterStateValue);
 };

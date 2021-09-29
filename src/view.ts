@@ -1,6 +1,6 @@
 class Render {
-  private counterView: number = 0;
-  private parentElement = document.querySelector('.render');
+  counterViewValue = 0;
+  parentElement = document.querySelector('.render');
 
   addHandlerUpdateCounter(handler: Function) {
     this.parentElement?.addEventListener('click', e => {
@@ -18,25 +18,27 @@ class Render {
 
   generateMarkup() {
     return `
-  <button class="btn btn--update-counter" data-update-to=${
-    this.counterView - 1
-  }>–</button>
-        <span>${this.counterView}</span>
-        <button class="btn btn--update-counter" data-update-to=${
-          this.counterView + 1
-        }>+</button>
-        `;
+    <span>${this.counterViewValue}</span>
+    <span class="recipe__info-text">servings</span>
+    <button class="btn btn--update-counter" data-update-to="${
+      this.counterViewValue - 1
+    }"><strong>–</strong></button>
+    <button class="btn btn--update-counter" data-update-to="${
+      this.counterViewValue + 1
+    }"><strong>+</strong></button>
+    `;
   }
-
-  render(counterModelValue: number) {
-    this.counterView = counterModelValue;
-    const markup = this.generateMarkup();
-    this.parentElement?.insertAdjacentHTML('afterbegin', markup);
-  }
-
   clear() {
-    if (this.parentElement) this.parentElement.innerHTML = '';
+    if (this.parentElement) {
+      this.parentElement.innerHTML = '';
+    }
+  }
+  render(counterStateValue: number) {
+    this.counterViewValue = counterStateValue;
+    const markup = this.generateMarkup();
+    if (this.parentElement) {
+      this.parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
   }
 }
-
 export default new Render();
