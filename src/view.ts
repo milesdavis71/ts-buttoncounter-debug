@@ -18,6 +18,9 @@ export const addHandlerUpdateCounter = function (handler: Function) {
       const buttonTarget = e.target as HTMLInputElement;
       // A closest metódus mindkét buttont ki tudja jelölni, az azonos selector alapján.
       // amelyik gomb klikkelve lesz, abbón jön be a data-update-to-ban lévő adat.
+      // A typescript miatt előbb vizsgálni kell, hogy a buttonTarget html elem/(element)-e?
+      // Ezt az instanceof javascript operátorral lehet. Csak a HTMLElement jó ide,
+      // A HTMLInputElement vagy a HTMLButtonElement NEM.
       const btn = buttonTarget.closest('.btn--update-counter');
       if (!btn) return;
       if (btn instanceof HTMLElement) {
